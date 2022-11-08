@@ -1,19 +1,28 @@
 
 <div class="container">
-  <h1>My Task</h1>
-    <ul class="list-group pl-0">
+  <div class="m-3">
+    <h1>My Task</h1>
+  </div>
+  <div class="card">
+    <ul class="list-group list-group-flush pl-0">
       <% @tasks.each do |task| %>
-      <li class="list-group-item ">
+      <li class="list-group-item d-flex  align-items-center ">
         <% if task.completed %>
           <i class="fa-solid fa-star"></i>
         <% else %>
           <i class="fa-regular fa-square"></i>
         <% end %>
-        <%= link_to task.title, task_path(task) %>
+        <div class="px-3">
+          <%= link_to task.title, task_path(task) %>
+        </div>
+        <%= link_to task_path(task), data: { turbo_method: 'delete', turbo_confirm: "Delete #{task.title}?" }, class: 'btn btn-light' do %>
+        <i class="fa-solid fa-trash"></i>
+        <% end %>
       </li>
       <% end %>
     </ul>
-    <div class="form-group my-3">
-      <%= link_to "Add a new task", new_task_path %>
+  </div>
+    <div >
+      <p class="p-2"><%= link_to "Add a new task", new_task_path %></p>
     </div>
 </div>
